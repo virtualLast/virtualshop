@@ -2,40 +2,27 @@
     <div class="container-fluid">
         <div class="row">
             <aside class="col-xs-12 col-3">
-                <div :class="[$style.sidebar, 'p-3', 'mb-5']">
-                    <legend-component :title="legend" />
-                </div>
+                <sidebar />
             </aside>
-            <div class="col" />
+
+            <div class="col-xs-12 col-9">
+                <catalog />
+            </div>
         </div>
     </div>
 </template>
 
 
 <script>
-import LegendComponent from '../components/legend';
+import Catalog from '../components/catalog';
+import Sidebar from '../components/sidebar';
 
 export default {
     name: 'Products',
     components: {
-        LegendComponent,
+        Catalog,
+        Sidebar,
     },
-    data() {
-        return {
-            legend: 'Shipping takes 10-12 weeks, and products probably won\'t work',
-        };
-    },
+
 };
 </script>
-
-<style module lang="scss">
-@import '../../scss/components/light-component';
-.sidebar {
-  @include light-component;
-  ul {
-    li a:hover {
-      background: $blue-component-link-hover;
-    }
-  }
-}
-</style>
