@@ -2,19 +2,27 @@
     <div class="container-fluid">
         <div class="row">
             <aside class="col-xs-12 col-3">
-                <div class="sidebar p-3 mb-5" />
+                <div class="sidebar p-3 mb-5">
+                    <legend-component />
+                </div>
             </aside>
+            <div class="col" />
         </div>
     </div>
 </template>
 
 
 <script>
+import LegendComponent from '../components/legend';
+
 export default {
     name: 'Products',
+    components: {
+        LegendComponent,
+    },
     data() {
         return {
-            firstName: 'Mike',
+            legend: 'Shipping takes 10-12 weeks, and products probably won\'t work',
         };
     },
 };
