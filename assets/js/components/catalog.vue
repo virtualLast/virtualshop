@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import LegendComponent from './legend.vue';
+import LegendComponent from '@/components/legend.vue';
 
 export default {
     name: 'Catalog',
