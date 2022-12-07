@@ -7,21 +7,21 @@
         <ul class="nav flex-column mb4">
             <li class="nav-item">
                 <a
+                    href="#"
                     class="nav-link"
-                    href="/"
                 >All Products</a>
             </li>
-            <li class="nav-item">
+            <li
+                v-for="(category, index) in categories"
+                :key="index"
+                class="nav-item"
+            >
                 <a
+                    :href="category.link"
                     class="nav-link"
-                    href="#"
-                >Category A</a>
-            </li>
-            <li class="nav-item">
-                <a
-                    class="nav-link"
-                    href="#"
-                >Category B</a>
+                >
+                    {{ category.name }}
+                </a>
             </li>
         </ul>
     </div>
@@ -31,6 +31,20 @@
 <script>
 export default {
     name: 'Sidebar',
+    data() {
+        return {
+            categories: [
+                {
+                    name: 'Dot Matrix Printers',
+                    link: '#',
+                },
+                {
+                    name: 'Iomega Zip Drives',
+                    link: '#',
+                },
+            ],
+        };
+    },
 };
 </script>
 
