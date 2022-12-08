@@ -32,7 +32,7 @@ export default {
             products: [],
         };
     },
-    async mounted() {
+    async created() {
         const response = await axios.get('/api/products');
         this.products = response.data['hydra:member'];
     },
