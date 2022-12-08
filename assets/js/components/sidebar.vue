@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="componentClass"
+        :class="[this.$style.component, 'p-3', 'mb-5']"
     >
         <div v-show="!collapsed">
             <h5 class="text-center">
@@ -62,18 +62,6 @@ export default {
             ],
         };
     },
-    computed: {
-        /**
-       * @returns {string[]}
-       */
-        componentClass() {
-            const classes = [this.$style.component, 'p-3', 'mb-5'];
-            if (this.collapsed) {
-                classes.push(this.$style.collapsed);
-            }
-            return classes;
-        },
-    },
 };
 </script>
 
@@ -88,9 +76,6 @@ export default {
     li a:hover {
       background: $blue-component-link-hover;
     }
-  }
-  &.collapsed {
-    width: 70px;
   }
 }
 </style>
