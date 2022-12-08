@@ -11,7 +11,10 @@
                 <li class="nav-item">
                     <a
                         href="#"
-                        class="nav-link"
+                        :class="{
+                            'nav-link': true,
+                            'selected': currentCategoryId === null,
+                        }"
                     >All Products</a>
                 </li>
                 <li
@@ -21,7 +24,10 @@
                 >
                     <a
                         :href="`/category/${category.id}`"
-                        class="nav-link"
+                        :class="{
+                            'nav-link': true,
+                            'selected': category['@id'] === currentCategoryId,
+                        }"
                     >
                         {{ category.name }}
                     </a>
@@ -55,6 +61,11 @@ export default {
             categories: [],
         };
     },
+    computed: {
+        currentCategoryId() {
+            return window.currentCategoryId;
+        },
+    },
     async created() {
         const response = await axios.get('/api/categories');
         this.categories = response.data['hydra:member'];
@@ -66,12 +77,19 @@ export default {
 <style lang="scss" module>
 @import '~styles/components/light-component';
 
-.component {
+.component :global {
   @include light-component;
 
   ul {
-    li a:hover {
-      background: $blue-component-link-hover;
+    li {
+      a {
+       &:hover {
+         background: $blue-component-link-hover;
+       }
+        &.selected {
+          background: $light-component-border;
+        }
+      }
     }
   }
 }
