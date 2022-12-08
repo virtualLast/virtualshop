@@ -14,6 +14,11 @@
 {% endblock %}
 
 {% block javascripts %}
+    {% if currentCategoryId is defined %}
+        window.currentCategoryId = '{{ currentCategoryId|e('js') }}';
+    {% else %}
+        window.currentCategoryId = null;
+    {% endif %}
     {{ parent() }}
 
     {{ encore_entry_script_tags('products') }}
