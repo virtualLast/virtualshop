@@ -12,7 +12,7 @@
             </div>
         </div>
         <product-list
-            :products="filteredProducts"
+            :products="products"
             :loading="loading"
         />
         <div class="row">
@@ -51,41 +51,31 @@ export default {
         return {
             legend: 'Shipping takes 10-12 weeks, and products probably won\'t work',
             products: [],
-            searchTerm: '',
             loading: false,
         };
     },
-    computed: {
-        filteredProducts() {
-            if (!this.searchTerm) {
-                return this.products;
-            }
-            return this.products.filter((product) => (
-                product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-            ));
-        },
-    },
-    async created() {
-        const params = {};
-        if (this.currentCategoryId) {
-            params.category = this.currentCategoryId;
-        }
-        this.loading = true;
-        let response;
-        try {
-            response = await fetchProducts(this.currentCategoryId);
-            this.loading = false;
-        } catch (e) {
-            this.loading = false;
-
-            return;
-        }
-
-        this.products = response.data['hydra:member'];
+    created() {
+        this.loadProducts(null);
     },
     methods: {
-        onSearchProducts(event) {
-            this.searchTerm = event.term;
+        /**
+       *
+       * @param {string} term
+       */
+        onSearchProducts({ term }) {
+            this.loadProducts(term);
+        },
+        async loadProducts(searchTerm) {
+            this.loading = true;
+            let response;
+            try {
+                response = await fetchProducts(this.currentCategoryId, searchTerm);
+                this.loading = false;
+            } catch (e) {
+                this.loading = false;
+                return;
+            }
+            this.products = response.data['hydra:member'];
         },
     },
 };
