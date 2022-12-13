@@ -2,9 +2,10 @@
     <div>
         <div class="row">
             <div class="col-12">
-                <h1>
-                    Products
-                </h1>
+                <title-component
+                    :current-category-id="currentCategoryId"
+                    :categories="categories"
+                />
             </div>
         </div>
         <product-list
@@ -19,12 +20,14 @@
 
 <script>
 import LegendComponent from '@/components/legend.vue';
+import TitleComponent from '@/components/title.vue';
 import ProductList from '@/components/product-list/index.vue';
 import { fetchProducts } from '@/services/products-service';
 
 export default {
     name: 'Catalog',
     components: {
+        TitleComponent,
         LegendComponent,
         ProductList,
     },
@@ -32,6 +35,10 @@ export default {
         currentCategoryId: {
             type: String,
             default: null,
+        },
+        categories: {
+            type: Array,
+            required: true,
         },
     },
     data() {
