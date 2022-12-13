@@ -1,8 +1,12 @@
-import axios from 'axios';
-
 /**
- * @returns {Promise<axios.AxiosResponse<any>>}
+ * @returns {Promise<unknown>}
  */
 export function fetchCategories() {
-    return axios.get('/api/categories');
+    return new Promise((resolve, reject) => {
+        resolve({
+            data: {
+                'hydra:member': window.categories,
+            },
+        });
+    });
 }
