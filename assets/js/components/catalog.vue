@@ -72,6 +72,7 @@ export default {
                 response = await fetchProducts(this.currentCategoryId, searchTerm);
                 this.loading = false;
             } catch (e) {
+                console.log(e);
                 this.loading = false;
                 return;
             }
