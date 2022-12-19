@@ -54,6 +54,11 @@ export default {
             loading: false,
         };
     },
+    watch: {
+        currentCategoryId() {
+            this.loadProducts(null);
+        },
+    },
     created() {
         this.loadProducts(null);
     },
