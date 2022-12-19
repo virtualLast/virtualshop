@@ -52,15 +52,16 @@ export default {
             legend: 'Shipping takes 10-12 weeks, and products probably won\'t work',
             products: [],
             loading: false,
+            searchTerm: null,
         };
     },
     watch: {
         currentCategoryId() {
-            this.loadProducts(null);
+            this.loadProducts();
         },
     },
     created() {
-        this.loadProducts(null);
+        this.loadProducts();
     },
     methods: {
         /**
@@ -68,13 +69,14 @@ export default {
        * @param {string} term
        */
         onSearchProducts({ term }) {
+            this.searchTerm = term;
             this.loadProducts(term);
         },
-        async loadProducts(searchTerm) {
+        async loadProducts() {
             this.loading = true;
             let response;
             try {
-                response = await fetchProducts(this.currentCategoryId, searchTerm);
+                response = await fetchProducts(this.currentCategoryId, this.searchTerm);
                 this.loading = false;
             } catch (e) {
                 console.log(e);
