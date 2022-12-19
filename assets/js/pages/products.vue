@@ -38,6 +38,7 @@ export default {
         return {
             sidebarCollapsed: false,
             categories: [],
+            currentCategoryId: getCurrentCategoryId(),
         };
     },
     computed: {
@@ -46,9 +47,6 @@ export default {
         },
         contentClass() {
             return this.sidebarCollapsed ? 'col-xs-12 col-11' : 'col-xs-12 col-9';
-        },
-        currentCategoryId() {
-            return getCurrentCategoryId();
         },
     },
     async created() {
